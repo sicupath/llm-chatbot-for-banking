@@ -1,3 +1,4 @@
+import json
 from typing import List, Tuple
 
 from openai import ChatCompletion
@@ -8,7 +9,7 @@ from ..utils import logger
 from .prompts import PROMPTS
 from .vecstores import Vecstores
 
-map_int_topic = {"0": "banco_info", "1": "transaccion", "2": "other"}
+map_int_topic = {"0": "GENERAL_INFO", "1": "ADVICE", "2": "OTHER"}
 
 
 class Agent:
@@ -23,23 +24,23 @@ class Agent:
         :param history: Chat history
         :return: Tuple of User's message, AI message and AI's message as a string.
         """
-        logger.info(user_msg)
+        history = self.format_history(history)
+        # gen_msg = self.generate_message(user_msg, history)
+        # logger.info(f"GENERATED MSG: {gen_msg}")
         topic = self.get_topic(user_msg)
-        logger.info(topic)
+        logger.info(f"TOPIC: {topic}")
 
-        if topic == "transaccion":
-            ai_msg = "Lo siento, el servicio de transacciones aun no está disponible"
-        else:
-            context, metadatas = self.get_context(user_msg, topic)
-            history = self.format_history(history)
+        context, metadatas = self.get_context(user_msg, topic)
 
-            prompt = PROMPTS["GET_INFO"].format(
-                query=user_msg, context=context, history=history
-            )
-            logger.info(prompt)
-            # print(f"\PROMPT: {prompt} \n")
+        prompt = PROMPTS["GET_INFO"].format(
+            query=user_msg, context=context, history=history
+        )
+        logger.info(prompt)
 
-            ai_msg = self.chat_completion(prompt)
+        ai_msg_json_str = self.chat_completion(prompt)
+        ai_msg_json = json.loads(ai_msg_json_str)
+        logger.info(ai_msg_json)
+        ai_msg, ai_msg_summary = ai_msg_json["respuesta"], ai_msg_json["resumen"]
 
         return (
             AiChatMessage(**{"role": "user", "content": user_msg}),
@@ -78,7 +79,7 @@ class Agent:
         """
         logger.info(f"Context topic: {topic}")
 
-        if topic in "other":
+        if topic in "OTHER":
             return "No context provided.", []
 
         documents = self.vecstore.similarity_search(q, topic)
@@ -98,6 +99,10 @@ class Agent:
         :return: Formatted history string
         """
         return "\n".join([m for m in history])
+
+    def generate_message(self, query, history):
+        prompt = PROMPTS["GENERATE_MSG"].format(history=history, query=query)
+        return self.chat_completion(prompt)
 
 
     def chat_completion(self, prompt: str, max_tokens: int = None) -> str:
