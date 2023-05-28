@@ -24,23 +24,22 @@ class Agent:
         :param history: Chat history
         :return: Tuple of User's message, AI message and AI's message as a string.
         """
-        history = self.format_history(history)
-        # gen_msg = self.generate_message(user_msg, history)
-        # logger.info(f"GENERATED MSG: {gen_msg}")
+        if history:
+            user_msg = self.generate_message(user_msg, history)
+            logger.info(f"GENERATED MSG: {user_msg}")
+
         topic = self.get_topic(user_msg)
         logger.info(f"TOPIC: {topic}")
 
         context, metadatas = self.get_context(user_msg, topic)
+        history = self.format_history(history)
 
         prompt = PROMPTS["GET_INFO"].format(
             query=user_msg, context=context, history=history
         )
         logger.info(prompt)
 
-        ai_msg_json_str = self.chat_completion(prompt)
-        ai_msg_json = json.loads(ai_msg_json_str)
-        logger.info(ai_msg_json)
-        ai_msg, ai_msg_summary = ai_msg_json["respuesta"], ai_msg_json["resumen"]
+        ai_msg = self.chat_completion(prompt)
 
         return (
             AiChatMessage(**{"role": "user", "content": user_msg}),
@@ -101,7 +100,8 @@ class Agent:
         return "\n".join([m for m in history])
 
     def generate_message(self, query, history):
-        prompt = PROMPTS["GENERATE_MSG"].format(history=history, query=query)
+        last_message = history[-1]
+        prompt = PROMPTS["GENERATE_MSG"].format(last_message=last_message, query=query)
         return self.chat_completion(prompt)
 
 

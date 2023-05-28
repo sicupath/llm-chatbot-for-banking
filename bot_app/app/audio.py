@@ -44,7 +44,6 @@ async def download_file(chat_id: int, file_id: str):
         logger.info("Received audio")
         async with AIOFile(f"voice/{chat_id}.ogg", "wb") as file:
             await file.write(response.content)
-            logger.info("Audio file downloaded successfully.")
         return True
     else:
         logger.error("Failed to download the audio file.")
@@ -54,7 +53,6 @@ async def download_file(chat_id: int, file_id: str):
 async def process_file(chat_id):
     data, sr = sf.read(f"voice/{chat_id}.ogg")
     sf.write(f"voice/{chat_id}.wav", data, sr, "PCM_16")
-    logger.info("Succesfully wrote .wav file")
 
 
 class NamedBytesIO(io.BytesIO):
