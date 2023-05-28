@@ -8,9 +8,9 @@ Desde su su creación, estos modelos ya cuentan con una vasta cantidad de conoci
 con los que podrá tener conversaciones y responder preguntas.
 
 
-## ¿Qué es?
+## ¿Qué/Quién es Quetzal?
 
-<Name> es un sistema asistente virtual basado en el modelo GPT 3.5 de Openai. Este asistente tiene acceso a la base de datos generada por el equipo que contiene alguno de los productos mas populares de Banorte.
+Quetzal es un asistente virtual basado en el modelo GPT 3.5 de Openai. Este asistente tiene acceso a la base de datos generada por el equipo que contiene alguno de los productos mas populares de Banorte. Con este conocimiento agregado, Quetzal es capaz de responder preguntas complejas, poco explicitas, poco estructuras o con errores gramáticales. Esto le ofrece una gran ventaja frente a los asistentes virtuales tradicionales.
 
 ## Funcionalidad
 
