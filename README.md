@@ -31,6 +31,10 @@ Esta tarea parece simple, sin embargo, para que la experiencia sea lo mas fluida
 * Solución: El asistente ha sido programada para reconocer este tipo de mensajes y lo que hará será tratar la conversación basado en el tipo de cliente con el que esta trabajando y le indicará recomendaciones dependiendo de ello.
 
 
+## Arquitectura
+
+<img src="https://random-jerry.s3.amazonaws.com/Arq.png" width="800" >
+<img src="https://random-jerry.s3.amazonaws.com/infra_banorte.png" width="800" >
 
 ## Activar al asistente
 
