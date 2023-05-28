@@ -3,7 +3,7 @@ import os
 import aioredis
 import httpx
 from dotenv import load_dotenv
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from pydantic import ValidationError
 import pprint
 load_dotenv()
@@ -15,6 +15,7 @@ from .text import send_message
 from .utils import logger
 
 REDIS_URL = os.getenv("REDIS_URL")
+MAP_CHAT_PROFILE = {2067529574: "youth", -961331167: "senior"}
 
 app = FastAPI()
 
@@ -39,6 +40,10 @@ async def telegram_webhook(request: Request):
         logger.error(e.errors())
         return {"status": "error"}
 
+@app.post("/tokens")
+def get_spent_tokens():
+    return app.state.agent.total_tokens
+
 
 async def validate_data(data) -> schemas.Message:
     try:
@@ -56,7 +61,8 @@ async def handle_chat(msg):
     chat_history = await app.state.redis.lrange(chat_id, 0, -1)
     chat_history = [x.decode("utf-8") for x in chat_history]
 
-    user_msg, ai_msg, ai_msg_telegram = app.state.agent(user_msg_raw, chat_history)
+    profile = MAP_CHAT_PROFILE.get(chat_id, "youth")
+    user_msg, ai_msg, ai_msg_telegram = app.state.agent(profile, user_msg_raw, chat_history)
 
     await app.state.redis.rpush(chat_id, str(user_msg))
     await app.state.redis.rpush(chat_id, str(ai_msg))

@@ -11,12 +11,12 @@ from .vecstores import Vecstores
 
 map_int_topic = {"0": "GENERAL_INFO", "1": "ADVICE", "2": "OTHER"}
 
-
 class Agent:
     def __init__(self):
         self.vecstore = Vecstores()
+        self.total_tokens = 0
 
-    def __call__(self, user_msg: str, history: List[str]) -> Tuple[AiChatMessage]:
+    def __call__(self, profile: int, user_msg: str, history: List[str]) -> Tuple[AiChatMessage]:
         """
         Generate AI response for the given user message and history.
 
@@ -24,17 +24,14 @@ class Agent:
         :param history: Chat history
         :return: Tuple of User's message, AI message and AI's message as a string.
         """
-        if history:
-            user_msg = self.generate_message(user_msg, history)
-            logger.info(f"GENERATED MSG: {user_msg}")
 
         topic = self.get_topic(user_msg)
         logger.info(f"TOPIC: {topic}")
 
-        context, metadatas = self.get_context(user_msg, topic)
+        context, metadatas = self.get_context(user_msg, topic, profile)
         history = self.format_history(history)
 
-        prompt = PROMPTS["GET_INFO"].format(
+        prompt = PROMPTS[f"GET_INFO_{profile}"].format(
             query=user_msg, context=context, history=history
         )
         logger.info(prompt)
@@ -68,7 +65,7 @@ class Agent:
         topic = map_int_topic[topic]
         return topic
 
-    def get_context(self, q: str, topic: str) -> Tuple:
+    def get_context(self, q: str, topic: str, profile: str) -> Tuple:
         """
         Get context for a given query and topic.
 
@@ -78,10 +75,10 @@ class Agent:
         """
         logger.info(f"Context topic: {topic}")
 
-        if topic in "OTHER":
+        if "OTHER" in topic:
             return "No context provided.", []
 
-        documents = self.vecstore.similarity_search(q, topic)
+        documents = self.vecstore.similarity_search(q, profile)
 
         metadatas = [doc.metadata["source"] for doc in documents]
         raw_context = "\n\n".join([doc.page_content for doc in documents])
@@ -119,4 +116,7 @@ class Agent:
                 {"role": "user", "content": prompt}
             ],
             max_tokens=max_tokens)
+            
+        self.total_tokens += response["usage"]["total_tokens"]
         return response['choices'][0]['message']['content']
+    

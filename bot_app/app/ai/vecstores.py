@@ -15,10 +15,17 @@ class Vecstores:
         from langchain.vectorstores import Chroma
 
         embeddings = self.get_embeddings_engine()
-        self.vecstore = Chroma(
-            persist_directory=str(VECSTORE_DIR),
-            embedding_function=embeddings,
-            )
+
+        self.profiles = {}
+        for profile_path in VECSTORE_DIR.iterdir():
+            profile = str(profile_path.stem)
+
+            self.profiles[profile] = \
+                Chroma(
+                    persist_directory=str(profile_path),
+                    embedding_function=embeddings,
+                )
+
 
     def get_embeddings_engine(self):
         from langchain.embeddings import OpenAIEmbeddings
@@ -26,6 +33,7 @@ class Vecstores:
         embedding_engine = OpenAIEmbeddings(model="text-embedding-ada-002")
         return embedding_engine
 
-    def similarity_search(self, q: str, topic: int) -> List[Document]:
-        docs = self.vecstore.similarity_search(q, k=3)
+    def similarity_search(self, q: str, profile: int) -> List[Document]:
+
+        docs = self.profiles[profile].similarity_search(q, k=3)
         return docs
