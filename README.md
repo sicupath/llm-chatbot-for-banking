@@ -1,7 +1,7 @@
 # AI Virtual Assistant
 
 ## Motivation
-We were tasked with creating an AI product for the largest mexican bank (Banorte).
+We were tasked with creating an AI product for the largest mexican bank (Banorte).\
 Modern banking is characterized by an abundance of publicly accessible information. However, this also poses a challenge as clients would have to sift through large quantities of text to find answers to their urgent questions. It can be a time-consuming and sometimes frustrating process. This is where large language models (LLMs) can bridge the gap. Our vision is to further enhance these models by specializing these AI models in the banking domain. By providing them access to extensive banking documents, these AI systems can quickly and accurately draw relevant information to answer clients' queries. 
 
 ## What?
@@ -26,9 +26,10 @@ This task may seem simple, but to make the experience as seamless and effective 
   * Solution: The assistant has been programmed to recognize these types of messages, and it will handle the conversation based on the type of client it is interacting with, offering recommendations accordingly.
 
 ## Architecture
-
-<img src="https://random-jerry.s3.amazonaws.com/Arq.png" width="800" >
-<img src="https://random-jerry.s3.amazonaws.com/infra_banorte.png" width="800" >
+ <p align="center">
+  <img src="https://random-jerry.s3.amazonaws.com/Arq.png" width="900" >
+  <img src="https://random-jerry.s3.amazonaws.com/github_images/banorte_infra.png" width="800" >
+ </p>
 
 ## Activating the Assistant
 
@@ -43,6 +44,5 @@ To spin up the server, we use Docker-compose. This will start the Fastapi server
 ```
 docker compose up
 ```
-"""
 
 
