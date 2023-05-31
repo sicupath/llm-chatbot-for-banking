@@ -1,4 +1,4 @@
-# AI Virtual Assistant
+# AI Virtual Assistant (Hackathon)
 
 ## Motivation
 We were tasked with creating an AI product for the largest mexican bank (Banorte).\
