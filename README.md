@@ -1,8 +1,7 @@
 # AI Virtual Assistant
 
 ## Motivation
-
-We were tasked with creating a disruptive project for the largest mexican bank (Banorte).
+We were tasked with creating an AI product for the largest mexican bank (Banorte).
 Modern banking is characterized by an abundance of publicly accessible information. However, this also poses a challenge as clients would have to sift through large quantities of text to find answers to their urgent questions. It can be a time-consuming and sometimes frustrating process. This is where large language models (LLMs) can bridge the gap. Our vision is to further enhance these models by specializing these AI models in the banking domain. By providing them access to extensive banking documents, these AI systems can quickly and accurately draw relevant information to answer clients' queries. 
 
 ## What?
