@@ -1,53 +1,49 @@
-# Asistente Virtual
+# AI Virtual Assistant
 
+## Motivation
 
-## Motivación
+We were tasked with creating a disruptive project for the largest mexican bank (Banorte).
+Modern banking is characterized by an abundance of publicly accessible information. However, this also poses a challenge as clients would have to sift through large quantities of text to find answers to their urgent questions. It can be a time-consuming and sometimes frustrating process. This is where large language models (LLMs) can bridge the gap. Our vision is to further enhance these models by specializing these AI models in the banking domain. By providing them access to extensive banking documents, these AI systems can quickly and accurately draw relevant information to answer clients' queries. 
 
-Los modelos de lenguaje natural procesado han llegado para revolucionar la manera en la que interactuamos con sistemas inteligentes, especificamente asistentes virtuales y chatbots.
-Desde su su creación, estos modelos ya cuentan con una vasta cantidad de conocimiento de todo tipo. Sin embargo, ¿Qué sucede si lo queremos hacer experto en un area? Para esto, podemos utilizar los mismos models previamente mencionados y darle acceso a documentos 
-con los que podrá tener conversaciones y responder preguntas.
+## What?
 
+We developed a virtual assistant powered by OpenAI's GPT-3.5 model. This assistant has access to a knowledge database created by our team, which contains some of Banorte's most popular products. With this, the assistant can respond to complex, implicitly phrased, poorly structured or grammatically incorrect questions. This gives our solution a significant advantage over traditional virtual assistants.
 
-## ¿Qué/Quién es Quetzal?
+## Functionality
 
-Quetzal es un asistente virtual basado en el modelo GPT 3.5 de Openai. Este asistente tiene acceso a la base de datos generada por el equipo que contiene alguno de los productos mas populares de Banorte. Con este conocimiento agregado, Quetzal es capaz de responder preguntas complejas, poco explicitas, poco estructuras o con errores gramáticales. Esto le ofrece una gran ventaja frente a los asistentes virtuales tradicionales.
+Our developed Assistant is accesed through Telegram. We imagine this would be a quick and simple way for clients to access.
+* The assistant can receive text messages and respond to them using the provided knowledge base.
+* The assistant can receive voice messages, transcribe them using Whisper (OpenAI), and respond to them using the provided knowledge base.
 
-## Funcionalidad
+## How does it work?
 
-El código actual funciona para que el asistente responda a mensajes de Telegram, esto debido a la facilidad con la que se puede obtener acceso a la API de dicho servicio de mensajería.
-* El asistente puede recibir mensajes de texto y contestarlos utilizando los documentos proporcionados.
-* El asistente puede recibir mensajes de voz transcribirlos a texto utilizando Whisper (OpenAI) y contestarlos utilizando los documentos proporcionados relacionados.
+In simple terms, when the assistant receives a message, it searches for relevant information in the provided documents and answers the question using only authorized content.
+This task may seem simple, but to make the experience as seamless and effective as possible, some challenges arose. We present them along with their solutions.
+1. Challenge: The user's question might be implied from the past conversation.
+  * Solution: We store the assistant's conversation with each client in a Redis database (cache type, quick access).
+2. Challenge: (Personalization) The agent behaves the same for all profiles regardless of age or background.
+  * Solution: We create different agents (assistants) for each profile, where each one has specifications for the type of client they will be working with.
+3. Challenge: The client may not have a specifc question. The query could be a more open ended "I need advice" type of query.
+  * Solution: The assistant has been programmed to recognize these types of messages, and it will handle the conversation based on the type of client it is interacting with, offering recommendations accordingly.
 
-
-## ¿Cómo funciona?
-
-A simples rasgos, cuando el asistente recibe un mensaje buscará información relevante en los documentos proveidos y responderá la pregunta utilizando solo el contenido autorizado.
-Esta tarea parece simple, sin embargo, para que la experiencia sea lo mas fluida y eficaz posible se presentan algunos desafios. A continuación los presentamos y como fueron resueltos.
-* Desafio: La pregunta del usuario puede ser implicita de la conversación pasada.
-* Solución: Guardamos la conversación del asistente con cada cliente en una base de datos Redis (tipo cache, rápido acceso).
-* Personalización: No existe un servicio diferente para los diferentes perfiles de usuario.
-* Solución: Crear diferentes agentes (asistentes) donde cada uno tiene especificaciones para el tipo de cliente con el que trabajará.
-* Desafio: El cliente puede no tener una pregunta, simplemente quiere explorar sus opciones.
-* Solución: El asistente ha sido programada para reconocer este tipo de mensajes y lo que hará será tratar la conversación basado en el tipo de cliente con el que esta trabajando y le indicará recomendaciones dependiendo de ello.
-
-
-## Arquitectura
+## Architecture
 
 <img src="https://random-jerry.s3.amazonaws.com/Arq.png" width="800" >
 <img src="https://random-jerry.s3.amazonaws.com/infra_banorte.png" width="800" >
 
-## Activar al asistente
+## Activating the Assistant
 
-Crear un archivo `.env` e incluir las variables requeridas para el funcionamiento.
+Create a `.env` file and include the required variables for operation.
 ```
 OPENAI_API_KEY=""
 TELEGRAM_TOKEN=""
 REDIS_URL=""
 ```
 
-Para levantar el servidor se utiliza Docker-compose. Esto comenzará el servidor de Fastapi, Nginx y Redis.
+To spin up the server, we use Docker-compose. This will start the Fastapi server, Nginx, and Redis.
 ```
 docker compose up
 ```
+"""
 
 
