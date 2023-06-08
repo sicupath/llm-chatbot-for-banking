@@ -26,10 +26,17 @@ This task may seem simple, but to make the experience as seamless and effective 
   * Solution: The assistant has been programmed to recognize these types of messages, and it will handle the conversation based on the type of client it is interacting with, offering recommendations accordingly.
 
 ## Architecture
- <p align="center">
-  <img src="https://random-jerry.s3.amazonaws.com/github_images/hackathon-banorte/LLM_flow.png" width="900" >
-  <img src="https://random-jerry.s3.amazonaws.com/github_images/hackathon-banorte/banorte_infra.png" width="800" >
- </p>
+<p align="center">
+  <figure>
+    <img src="https://random-jerry.s3.amazonaws.com/github_images/hackathon-banorte/LLM_flow.png" width="900" alt="LLM Flow">
+    <figcaption>LLM Flow</figcaption>
+  </figure>
+  <figure>
+    <img src="https://random-jerry.s3.amazonaws.com/github_images/hackathon-banorte/banorte_infra.png" width="800" alt="Banorte Infrastructure">
+    <figcaption>Infra Diagram</figcaption>
+  </figure>
+</p>
+
 
 ## Activating the Assistant
 
