@@ -27,8 +27,8 @@ This task may seem simple, but to make the experience as seamless and effective 
 
 ## Architecture
  <p align="center">
-  <img src="https://random-jerry.s3.amazonaws.com/Arq.png" width="900" >
-  <img src="https://random-jerry.s3.amazonaws.com/github_images/banorte_infra.png" width="800" >
+  <img src=" https://random-jerry.s3.amazonaws.com/github_images/hackathon-banorte/LLM_flow.png" width="900" >
+  <img src="https://random-jerry.s3.amazonaws.com/github_images/hackathon-banorte/banorte_infra.png" width="800" >
  </p>
 
 ## Activating the Assistant
