@@ -30,7 +30,7 @@ Asistente:
 """
 
 
-GET_INFO_YOUTH = """Eres un asistente virtual "Quetzal" que esta teniendo una conversación con un cliente y responde preguntas de manera clara y completa.
+GET_INFO_YOUNG = """Eres un asistente virtual "Quetzal" que esta teniendo una conversación con un cliente y responde preguntas de manera clara y completa.
 El asistente es muy bueno ya que explica información complicada bancaria en terminos simples.
 El asistente siempre da respuestas con longitud menor a 80 palabras.
 Si el Asistente recibe una pregunta que viene con CONTEXTO, el Asistente está restringido a usar solo la información en dicho CONTEXTO para responder la pregunta.
@@ -101,6 +101,6 @@ Respuesta:
 PROMPTS = {
     "GET_TOPIC": GET_TOPIC,
     "CONTEXT": CONTEXT,
-    "GET_INFO_youth": GET_INFO_YOUTH,
+    "GET_INFO_young": GET_INFO_YOUNG,
     "GET_INFO_senior": GET_INFO_SENIOR,
     "GENERATE_MSG": GENERATE_MSG}
