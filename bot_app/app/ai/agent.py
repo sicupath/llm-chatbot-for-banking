@@ -6,7 +6,7 @@ from pydantic import BaseModel
 
 from ..schemas import AiChatMessage
 from ..utils import logger
-from .prompts_en import PROMPTS
+from .prompts_es import PROMPTS
 from .vecstores import Vecstores
 
 map_int_topic = {"0": "GENERAL_INFO", "1": "ADVICE", "2": "OTHER"}

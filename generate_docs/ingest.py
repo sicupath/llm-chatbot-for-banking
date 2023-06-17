@@ -25,7 +25,6 @@ def get_text_splitter():
     )
     return text_splitter
 
-
 def get_embeddings_engine():
     from langchain.embeddings import OpenAIEmbeddings
 
