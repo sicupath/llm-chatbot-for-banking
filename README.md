@@ -27,13 +27,13 @@ This task may seem simple, but to make the experience as seamless and effective 
 
 ## Architecture
 <p align="center">
-  <img src="https://random-jerry.s3.amazonaws.com/github_images/hackathon-banorte/LLM_flow.png" width="900" alt="LLM Flow">
+  <img src="https://random-jerry.s3.amazonaws.com/github_images/hackathon-banorte/LLM_flow.png" width="600" alt="LLM Flow">
   <br>
   Large Language Model Flow
 </p>
 
 <p align="center">
-  <img src="https://random-jerry.s3.amazonaws.com/github_images/hackathon-banorte/banorte_infra.png" width="800" alt="Banorte Infrastructure">
+  <img src="https://random-jerry.s3.amazonaws.com/github_images/hackathon-banorte/banorte_infra.png" width="700" alt="Banorte Infrastructure">
   <br>
   Infra Diagram
 </p>
